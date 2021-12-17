@@ -1,12 +1,11 @@
 package com.upgrad.movieapp.entities;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -20,11 +19,24 @@ public class Theatre {
     private float ticketPrice = 150.00f;
 
     @ManyToOne
-    @JoinColumn(name = "city_id", nullable = false)
+    @JoinColumn(name = "city_id")
     private City city;
+    @ManyToMany
+//    @JoinTable
+    @JoinTable(name="theatre_movieTable",joinColumns = @JoinColumn(name="theatre_count"),inverseJoinColumns = @JoinColumn(name =
+    "movie_count"))
+    private Set<Movie> movies;
 
     public int getTheatreId() {
         return theatreId;
+    }
+
+    private Set<Movie> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(Set<Movie> movies) {
+        this.movies = movies;
     }
 
     public void setTheatreId(int theatreId) {
@@ -58,6 +70,6 @@ public class Theatre {
     @Override
     public String toString() {
         return "Theatre{" + "theatreId=" + theatreId + ", theatreName='" + theatreName + '\'' + ", ticketPrice="
-                + ticketPrice + ", city=" + city.getCityName() + '}';
+                + ticketPrice + ", city=" + city.getCityName() + ", movies=" + this.getMovies().toString() + '}';
     }
 }

@@ -2,7 +2,7 @@ package com.upgrad.movieapp.dao;
 
 import com.upgrad.movieapp.entities.Customer;
 
-public interface CustomerDao {
+public interface CustomerDaoWithoutJPA {
     public Customer save(Customer customer);
     public Customer findById(int id);
     public Customer update(Customer customer);

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManagerFactory;
 
 @Repository
-public class CustomerDaoImpl implements CustomerDao {
+public class CustomerDaoImpl implements CustomerDaoWithoutJPA {
 
     private SessionFactory sessionFactory;
     @Autowired

@@ -2,17 +2,18 @@ package com.upgrad.movieapp.entities;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 public class Movie {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private int movieId;
 
     @Column(length = 50, nullable = false, unique = true)
     private String movieName;
 
-    @Column(name = "movie_desc", length = 500, nullable = false)
+    @Column(name = "movie_desc", length = 500)
     private String movieDescription;
 
     @Column(nullable = false)
@@ -21,11 +22,22 @@ public class Movie {
     @Column(nullable = false)
     private int duration;
 
-    @Column(length = 500, nullable = false)
+    @Column(length =3000)
     private String coverPhotoUrl;
 
-    @Column(length = 500, nullable = false)
+    @Column(length = 500)
     private String trailerUrl;
+
+    @ManyToMany (mappedBy = "movies", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private Set<Theatre> theatres;
+
+    public Set<Theatre> getTheatres() {
+        return theatres;
+    }
+
+    public void setTheatres(Set<Theatre> theatres) {
+        this.theatres = theatres;
+    }
 
     public int getMovieId() {
         return movieId;

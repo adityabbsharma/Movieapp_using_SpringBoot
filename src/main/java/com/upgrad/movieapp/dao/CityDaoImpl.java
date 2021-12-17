@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManagerFactory;
 
 @Repository
-public class CityDaoImpl implements CityDao{
+public class CityDaoImpl implements CityDaoWithoutJPA{
     private SessionFactory sessionFactory;
     @Autowired
     public CityDaoImpl(EntityManagerFactory entityManagerFactory){
